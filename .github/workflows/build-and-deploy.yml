@@ -1,5 +1,8 @@
 name: Build and Deploy
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build-and-deploy:
@@ -10,9 +13,17 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: 20200413-yarn.lock-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            20200413-yarn.lock-
+
       - name: Install and Build 🔧
         run: |
-          yarn install
+          yarn install --frozen-lockfile
           yarn build
 
       - name: Deploy 🚀
