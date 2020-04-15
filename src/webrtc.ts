@@ -7,7 +7,7 @@ const APP_STATE_CHANNEL_LABEL = "app-state-channel";
 
 const makeRTCPeerConnection = () => {
   const peerConnection = new RTCPeerConnection({
-    iceServers: [{ urls: ["stun:stun.l.google.com:19302", "stun:stun.services.mozilla.com:3478"] }],
+    iceServers: [{ urls: ["stun:stun.l.google.com:19302"] }],
   });
 
   peerConnection.addEventListener("signalingstatechange", (evt) => {
